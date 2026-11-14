@@ -1,126 +1,71 @@
 # Temperature & Humidity Data Collection and Analysis
 
-This project collects temperature and humidity data from an Arduino device via a serial connection, processes the data, and visualizes it using Python. The data is filtered to include only values within a specified range (20-120) and saved for further analysis.
+[![Status: Archived](https://img.shields.io/badge/Status-Archived-lightgrey.svg)]()
+[![Hardware: Arduino](https://img.shields.io/badge/Hardware-Arduino-00979D.svg)](https://www.arduino.cc/)
+[![Language: Python](https://img.shields.io/badge/Language-Python-3776AB.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+> ⚠️ **Repository Status: Archived**  
+> This is a foundational academic tutorial project (Jan 2025) demonstrating microcontroller serial communication, real-time data acquisition, CSV persistence, and statistical scatter visualization via pandas and matplotlib. It is preserved for reference.
 
 ---
 
-## Features
+## 📌 Features
 
-- Reads temperature and humidity data from an Arduino.
-- Filters data where temperature and humidity values are between 20 and 120.
-- Saves the filtered data to a CSV file.
-- Provides basic statistical analysis.
-- Plots a scatter graph of temperature vs. humidity for visualization.
+- **Microcontroller Interfacing**: Reads live temperature and humidity metrics from an Arduino Uno over serial USB.
+- **Data Filtering & Cleaning**: Validates ranges to discard physical sensor noise and malformed transmission strings.
+- **CSV Data Persistence**: Stores normalized environmental records into structured CSV formats for exploratory analysis.
+- **Statistical Analytics & Visualization**: Generates summary statistics via pandas and renders temperature vs. humidity scatter plots.
 
 ---
 
-## Prerequisites
+## 🛠️ Prerequisites
 
-1. **Hardware Requirements**:
-   - Arduino device with a temperature and humidity sensor (e.g., DHT11/DHT22).
-   - USB cable to connect the Arduino to your computer.
+### Hardware
+- Arduino Uno / Nano with DHT11 or DHT22 temperature & humidity sensor
+- USB connecting cable
 
-2. **Software Requirements**:
-   - Python 3.x installed on your system.
-   - Arduino IDE for uploading the appropriate sketch to your Arduino.
+### Software
+- Python 3.9+
+- Arduino IDE
 
-3. **Python Libraries**:
-   - `pyserial`
-   - `pandas`
-   - `matplotlib`
+---
 
-Install these libraries using:
+## 🚀 Setup & Execution
+
+### 1. Environment Installation
 ```bash
-pip install pyserial pandas matplotlib
+# Clone the repository
+git clone https://github.com/Knight6azer/Temperature-Humidity-Analysis.git
+cd Temperature-Humidity-Analysis
+
+# Create and activate virtual environment
+python -m venv venv
+# Windows:
+venv\Scripts\activate
+# Linux/macOS:
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
 ```
 
----
+### 2. Arduino Firmware Setup
+Upload your DHT sensor sketch to the Arduino to output serial telemetry at 9600 baud in the following format:
+```
+Temperature: 28.5	Humidity: 65.0
+```
 
-## Setup and Usage
+### 3. Run Data Acquisition
+Edit the COM port in `code.py` to match your system (e.g. `'COM3'` on Windows or `'/dev/ttyACM0'` on Linux):
+```bash
+python code.py
+```
 
-1. **Upload Arduino Sketch**:
-   - Upload the appropriate sketch to your Arduino to send temperature and humidity data in the format:
-     ```
-     Temperature: XX.X °C   Humidity: YY.Y %
-     ```
-
-2. **Connect Arduino**:
-   - Connect the Arduino to your computer and note the COM port it uses (e.g., `COM4`).
-
-3. **Run the Python Script**:
-   - Clone the repository:
-     ```bash
-     git clone <repo_url>
-     cd <repo_folder>
-     ```
-   - Execute the script:
-     ```bash
-     python collect_data.py
-     ```
-
-4. **Output**:
-   - The filtered data will be saved to `temperature_humidity_filtered.csv`.
-   - A scatter plot will visualize the relationship between temperature and humidity.
+The script will gather data, output summary statistics, write to `temperature_humidity_data.csv`, and render the visualization plot.
 
 ---
 
-## Code Overview
+## 📄 License
 
-- **Data Collection**:
-  - Connects to the Arduino via the serial port.
-  - Reads, parses, and filters temperature and humidity data.
-
-- **Data Saving**:
-  - Saves the filtered data into a CSV file for future use.
-
-- **Visualization**:
-  - Generates a scatter plot of temperature vs. humidity.
-
----
-
-## Example Output
-
-- **Sample Data**:
-  ```
-  Temperature (C),Humidity (%)
-  33.3,67.0
-  32.8,65.0
-  ...
-  ```
-
-- **Scatter Plot**:
-  ![Scatter Plot Example](https://github.com/Knight6azer/Temperature-Humidiy-Analysis/blob/main/Screenshot%20(13).png)
-
----
-
-## Troubleshooting
-
-1. **Serial Port Issues**:
-   - Ensure the correct COM port is specified in the script.
-   - Close other applications (e.g., Arduino IDE) using the same port.
-
-2. **Data Parsing Errors**:
-   - Ensure the Arduino sends data in the correct format.
-   - Check the sensor's functionality and calibration.
-
-3. **Empty Output**:
-   - Verify that the temperature and humidity values are within the specified range (20-120).
-
----
-
-## Contributions
-
-Contributions are welcome! Please submit a pull request with your proposed changes or open an issue for discussion.
-
----
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
----
-
-## Acknowledgments
-
-- Arduino community for providing excellent resources.
-- Python libraries for enabling seamless data processing and visualization.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
